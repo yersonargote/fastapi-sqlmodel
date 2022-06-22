@@ -28,3 +28,7 @@ class TeamUpdate(SQLModel):
     id: Optional[int] = None
     name: Optional[str] = None
     headquarters: Optional[str] = None
+
+
+class TeamReadWithHeroes(TeamRead):
+    heroes: List[HeroRead] = []

@@ -34,3 +34,5 @@ class HeroUpdate(SQLModel):
     age: Optional[int] = None
     team_id: Optional[int] = None
 
+class HeroReadWithTeam(HeroRead):
+    team: Optional[TeamRead] = None
