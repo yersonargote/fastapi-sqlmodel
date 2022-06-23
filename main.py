@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query
@@ -12,7 +14,7 @@ class TeamBase(SQLModel):
 class Team(TeamBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
-    heroes: List["Hero"] = Relationship(back_populates="team")
+    heroes: List[Hero] = Relationship(back_populates="team")
 
 
 class TeamCreate(TeamBase):
