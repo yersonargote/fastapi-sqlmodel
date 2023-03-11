@@ -12,7 +12,7 @@ pipenv install
 
 ## Run app
 
-***Note**: **Postgresql** should be runnging. See the *Postgresql* section.
+***Note***: **Postgresql** should be runnging. See the *Postgresql* section.
 
 - ***Option 1***:
 
@@ -30,13 +30,13 @@ uvicorn main:app --reload
 
 ## Postgresql
 
-***Option 1***: `recomended`
+- ***Option 1***: `recomended`
 
 ```bash
 docker-compose up -d
 ```
 
-***Option2***:
+- ***Option2***:
 
 ```bash
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
@@ -44,6 +44,26 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
 
 ## TODO
 
-- [ ] Make ***async** db 
-- [ ] Make **async*** endpoints
+- [ ] Make ***async*** db 
+- [ ] Make ***async*** endpoints
 - [ ] Modularize all
+- [ ] Change CRUD for SQLCRUD
+
+
+## Docs used
+
+### SQLModel
+
+1. [***SQLModel Teams***](https://github.com/tiangolo/sqlmodel/blob/main/docs_src/tutorial/fastapi/teams/tutorial001.py)
+
+### Github
+
+- [***testdrivenio***](https://github.com/testdrivenio/fastapi-sqlmodel-alembic/blob/main/project/app/db.py)
+
+- [***NathaliaBarreiros***](https://github.com/NathaliaBarreiros/nlp_api/tree/main/nlp_api/app)
+
+- [***Jonra1993***](https://github.com/jonra1993/fastapi-alembic-sqlmodel-async)
+
+- [***HamidDoost***](https://github.com/HamidDoost/user-data-handling-api/tree/main/src/app)
+
+- [***HamidDoost***](https://github.com/HamidDoost/user-data-handling-api/tree/main/src/app)
