@@ -11,6 +11,7 @@ class TeamBase(SQLModel):
     name: str = Field(index=True)
     headquarters: str
 
+
 class Team(TeamBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
@@ -59,6 +60,7 @@ class HeroUpdate(SQLModel):
     age: Optional[int] = None
     team_id: Optional[int] = None
 
+
 class HeroReadWithTeam(HeroRead):
     team: Optional[TeamRead] = None
 
@@ -67,12 +69,11 @@ class TeamReadWithHeroes(TeamRead):
     heroes: List[HeroRead] = []
 
 
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
+DATABASE_URL = "postgresql+psycopg2://postgres:postgres@localhost:5432/postgres"
 
 
 connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, echo=True, connect_args=connect_args)
+engine = create_engine(DATABASE_URL)
 
 
 def create_db_and_tables():
@@ -102,7 +103,12 @@ def create_hero(*, session: Session = Depends(get_session), hero: HeroCreate):
 
 
 @app.get("/heroes/", response_model=List[HeroRead])
-def read_heroes(*, session: Session = Depends(get_session), offset: int = 0, limit: int = Query(default=100, lte=100)):
+def read_heroes(
+    *,
+    session: Session = Depends(get_session),
+    offset: int = 0,
+    limit: int = Query(default=100, lte=100),
+):
     heroes = session.exec(select(Hero).offset(offset).limit(limit)).all()
     return heroes
 
@@ -116,7 +122,9 @@ def read_heroe(*, session: Session = Depends(get_session), hero_id: int):
 
 
 @app.patch("/heroes/{hero_id}", response_model=HeroRead)
-def update_hero(*, session: Session = Depends(get_session), hero_id: int, hero: HeroUpdate):
+def update_hero(
+    *, session: Session = Depends(get_session), hero_id: int, hero: HeroUpdate
+):
     db_hero = session.get(Hero, hero_id)
     if not db_hero:
         raise HTTPException(status_code=404, detail="Hero not found.")
@@ -149,7 +157,12 @@ def create_team(*, session: Session = Depends(get_session), team: TeamCreate):
 
 
 @app.get("/teams/", response_model=List[TeamRead])
-def read_teams(*, session: Session = Depends(get_session), offset: int = 0, limit: int = Query(default=100, lte=100)):
+def read_teams(
+    *,
+    session: Session = Depends(get_session),
+    offset: int = 0,
+    limit: int = Query(default=100, lte=100),
+):
     teams = session.exec(select(Team).offset(offset).limit(limit)).all()
     return teams
 
@@ -163,7 +176,12 @@ def read_team(*, team_id: int, session: Session = Depends(get_session)):
 
 
 @app.patch("/teams/{team_id}", response_model=TeamRead)
-def update_team(*, session: Session = Depends(get_session), team_id: int, team: TeamUpdate,):
+def update_team(
+    *,
+    session: Session = Depends(get_session),
+    team_id: int,
+    team: TeamUpdate,
+):
     db_team = session.get(Team, team_id)
     if not db_team:
         raise HTTPException(status_code=404, detail="Team not found")

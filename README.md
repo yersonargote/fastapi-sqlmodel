@@ -1,11 +1,49 @@
 # FastAPI and SQLModel
 
-Using this SQLModel ***[doc](https://sqlmodel.tiangolo.com/tutorial/fastapi/)***.
+[***SQLModel docs***](https://sqlmodel.tiangolo.com/tutorial/fastapi/)
 
-# Pip install
+[***Official github tutorials***](https://github.com/tiangolo/sqlmodel/tree/main/docs_src/tutorial)
 
-```python
-python -m pip install fastapi "uvicorn[standard]"
-pip install sqlmodel
-pip install requests pytest
+## Install dependencies
+
+```bash
+pipenv install
 ```
+
+## Run app
+
+***Note**: **Postgresql** should be runnging. See the *Postgresql* section.
+
+- ***Option 1***:
+
+```bash
+pipenv run uvicorn main:app --reload
+```
+
+- ***Option 2***:
+
+```bash
+pipenv shell
+
+uvicorn main:app --reload
+```
+
+## Postgresql
+
+***Option 1***: `recomended`
+
+```bash
+docker-compose up -d
+```
+
+***Option2***:
+
+```bash
+docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
+```
+
+## TODO
+
+- [ ] Make ***async** db 
+- [ ] Make **async*** endpoints
+- [ ] Modularize all
