@@ -44,10 +44,9 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
 
 ## TODO
 
-- [ ] Make ***async*** db 
-- [ ] Make ***async*** endpoints
-- [ ] Modularize all
-- [ ] Change CRUD for SQLCRUD
+- [x] Modularize all app
+- [x] Make ***async*** db 
+- [x] Make ***async*** endpoints
 
 
 ## Docs used
